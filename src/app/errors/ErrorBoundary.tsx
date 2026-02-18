@@ -16,7 +16,6 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (!this.state.hasError) return this.props.children;
-    const unusedvar: string = "gello";
 
     return (
       <div style={{ padding: 16 }}>
