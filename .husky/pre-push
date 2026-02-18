@@ -1,4 +1,13 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
-npm run test:backend
+BACKEND_DIR="../vn-lms-service"
+
+if [ ! -d "$BACKEND_DIR" ]; then
+  echo "❌ Backend repo not found at $BACKEND_DIR"
+  exit 1
+fi
+
+echo "Running backend unit tests..."
+
+cd "$BACKEND_DIR" || exit 1
+npm test
