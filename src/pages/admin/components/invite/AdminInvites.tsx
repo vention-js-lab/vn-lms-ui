@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 export function AdminInvitesComponent() {
   return (
@@ -12,9 +6,7 @@ export function AdminInvitesComponent() {
       <Card className="w-full max-w-2xl">
         <CardHeader>
           <CardTitle>Invite management</CardTitle>
-          <CardDescription>
-            Create, resend, revoke, and manage user invitations.
-          </CardDescription>
+          <CardDescription>Create, resend, revoke, and manage user invitations.</CardDescription>
         </CardHeader>
 
         <CardContent>

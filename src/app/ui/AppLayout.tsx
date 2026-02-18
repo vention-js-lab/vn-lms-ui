@@ -1,8 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
+import { NavLink, Outlet } from 'react-router-dom';
+import { Separator } from '@/components/ui/separator';
 
 const navLinkBase =
-  "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
+  'text-sm font-medium text-muted-foreground transition-colors hover:text-foreground';
 
 export function AppLayout() {
   return (
@@ -15,36 +15,28 @@ export function AppLayout() {
             <nav className="flex items-center gap-4">
               <NavLink
                 to="/login"
-                className={({ isActive }) =>
-                  `${navLinkBase} ${isActive ? "text-foreground" : ""}`
-                }
+                className={({ isActive }) => `${navLinkBase} ${isActive ? 'text-foreground' : ''}`}
               >
                 Login
               </NavLink>
 
               <NavLink
                 to="/admin/invites"
-                className={({ isActive }) =>
-                  `${navLinkBase} ${isActive ? "text-foreground" : ""}`
-                }
+                className={({ isActive }) => `${navLinkBase} ${isActive ? 'text-foreground' : ''}`}
               >
                 Invites
               </NavLink>
 
               <NavLink
                 to="/accept-invite"
-                className={({ isActive }) =>
-                  `${navLinkBase} ${isActive ? "text-foreground" : ""}`
-                }
+                className={({ isActive }) => `${navLinkBase} ${isActive ? 'text-foreground' : ''}`}
               >
                 Accept invite
               </NavLink>
             </nav>
           </div>
 
-          <span className="text-xs text-muted-foreground">
-            Sprint 1 shell
-          </span>
+          <span className="text-xs text-muted-foreground">Sprint 1 shell</span>
         </div>
       </header>
 

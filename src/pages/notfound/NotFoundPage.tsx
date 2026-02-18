@@ -1,11 +1,7 @@
-import { Card } from "@/components/ui/card";
-import {
-  Alert,
-  AlertTitle,
-  AlertDescription,
-} from "@/components/ui/alert";
+import { Card } from '@/components/ui/card';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export function NotFoundPage() {
   return (
@@ -18,10 +14,7 @@ export function NotFoundPage() {
           </AlertDescription>
         </Alert>
 
-        <Link
-          to="/login"
-          className="text-sm font-medium text-primary underline underline-offset-4"
-        >
+        <Link to="/login" className="text-sm font-medium text-primary underline underline-offset-4">
           Go to login
         </Link>
       </Card>

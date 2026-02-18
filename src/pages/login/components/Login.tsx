@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 export function LoginComponent() {
   return (
@@ -6,9 +6,7 @@ export function LoginComponent() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Login</CardTitle>
-          <CardDescription>
-            Enter your credentials to access the LMS platform.
-          </CardDescription>
+          <CardDescription>Enter your credentials to access the LMS platform.</CardDescription>
         </CardHeader>
 
         <CardContent>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = { children: React.ReactNode };
 type State = { hasError: boolean; error?: Error };
@@ -11,7 +11,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error) {
-    console.error("Unhandled UI error:", error);
+    console.error('Unhandled UI error:', error);
   }
 
   render() {
@@ -20,7 +20,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     return (
       <div style={{ padding: 16 }}>
         <h2>Something went wrong</h2>
-        <pre style={{ whiteSpace: "pre-wrap" }}>{this.state.error?.message}</pre>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>{this.state.error?.message}</pre>
       </div>
     );
   }
