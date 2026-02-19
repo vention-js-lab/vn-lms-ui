@@ -1,5 +1,5 @@
-import { Card } from '@/components/ui/card';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Card } from '#/components/ui/card';
+import { Alert, AlertTitle, AlertDescription } from '#/components/ui/alert';
 
 import { Link } from 'react-router-dom';
 
