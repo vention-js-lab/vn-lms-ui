@@ -1,4 +1,4 @@
-import { AdminInvitesComponent } from './components/invite/AdminInvites'
+import { AdminInvitesComponent } from './components/invite/invites'
 
 export default function AdminPage() {
   return (
