@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { AppLayout } from "@/app/ui/AppLayout";
-import LoginPage from "@/pages/login";
-import { AdminInvitesComponent } from "@/pages/admin/components/invite/invites";
-import { AcceptInviteComponent } from "@/pages/invite/components/AcceptInvite";
-import { NotFoundPage } from "@/pages/notfound/NotFoundPage";
-import { RouteConstantPaths as route } from "@/app/routes/constant/path";
+import { AppLayout } from "#/app/ui/AppLayout";
+import LoginPage from "#/pages/login";
+import { AdminInvitesComponent } from "#/pages/admin/components/invite/invites";
+import { AcceptInviteComponent } from "#/pages/invite/components/AcceptInvite";
+import { NotFoundPage } from "#/pages/notfound/NotFoundPage";
+import { RouteConstantPaths as route } from "#/app/routes/constant/path";
 export const router = createBrowserRouter([
   {
     path: route.ROOT,

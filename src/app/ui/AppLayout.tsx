@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "#/components/ui/separator";
 
 const navLinkBase =
   "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
