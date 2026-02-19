@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         Component: LoginPage,
       },
       {
-        path: route.ADMIN_INVITES,
+        path: route.ADMIN.INVITES,
         Component: AdminInvitesComponent,
       },
       {
