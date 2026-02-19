@@ -16,13 +16,13 @@ export default defineConfig([
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      eslintConfigPrettier, // Disables ESLint rules that conflict with Prettier formatting
+      eslintConfigPrettier,
     ],
     plugins: {
       prettier: prettierPlugin,
     },
     rules: {
-      'prettier/prettier': 'error', // Makes Prettier issues fail lint
+      'prettier/prettier': 'error',
     },
     languageOptions: {
       ecmaVersion: 2020,
