@@ -1,1 +1,6 @@
-npx lint-staged
+echo "🔧 running lint-staged pre-commit hook..."
+npx lint-staged || {
+    echo "❌ lint-staged failed: commit aborted."
+    exit 1
+}
+echo "✅ lint-staged passed: proceeding with commit."

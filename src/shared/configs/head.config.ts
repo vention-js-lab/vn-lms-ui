@@ -1,9 +1,9 @@
-import { createHead } from "@unhead/react/client";
+import { createHead } from '@unhead/react/client';
 
 export const headConfig = createHead({
   init: [
     {
-      titleTemplate: "%s | VN LMS",
+      titleTemplate: '%s | VN LMS',
     },
   ],
 });

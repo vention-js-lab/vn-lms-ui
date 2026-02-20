@@ -1,8 +1,8 @@
-import type { PropsWithChildren } from "react";
-import { AuthContext, type AuthContextStore } from "./auth.store";
+import type { PropsWithChildren } from 'react';
+import { AuthContext, type AuthContextStore } from './auth.store';
 
 const defaultAuthState: AuthContextStore = {
-  status: "pending",
+  status: 'pending',
   user: null,
   token: null,
 };
