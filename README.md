@@ -118,6 +118,3 @@ Preview production build:
 ```bash
 npm run preview
 ```
-
-
-
