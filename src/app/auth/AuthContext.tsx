@@ -17,8 +17,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       token,
       setToken,
       isAuthenticated: Boolean(token),
-      getAuthHeader: () =>
-        token ? { Authorization: `Bearer ${token}` } : ({} as Record<string, string>),
+      getAuthHeader: () => (token ? { Authorization: `Bearer ${token}` } : ({} as Record<string, string>)),
     };
   }, [token]);
 
