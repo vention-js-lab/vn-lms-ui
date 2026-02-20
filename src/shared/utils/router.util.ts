@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy } from 'react';
 
 export function lazyRoute<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

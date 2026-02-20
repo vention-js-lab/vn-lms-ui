@@ -1,16 +1,16 @@
-import { cwd } from "node:process";
-import { defineConfig, loadEnv } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import { checker } from "vite-plugin-checker";
-import viteTsconfigPaths from "vite-tsconfig-paths";
+import { cwd } from 'node:process';
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import { checker } from 'vite-plugin-checker';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => {
-  const envPrefix = ["VITE_"];
+  const envPrefix = ['VITE_'];
   const viteEnv = loadEnv(mode, __dirname, envPrefix);
   process.env = Object.assign(process.env, viteEnv);
 
-  const devPort = parseInt(process.env.VITE_APP_PORT ?? "", 10);
+  const devPort = parseInt(process.env.VITE_APP_PORT ?? '', 10);
 
   return {
     build: {
@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
         eslint: false,
         overlay: {
           initialIsOpen: false,
-          position: "br",
+          position: 'br',
         },
         root: cwd(),
       }),

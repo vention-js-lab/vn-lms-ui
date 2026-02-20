@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 type AuthContextAuthenticatedState = {
-  status: "authenticated";
+  status: 'authenticated';
   user: {
     id: string;
     email: string;
@@ -10,21 +10,19 @@ type AuthContextAuthenticatedState = {
 };
 
 type AuthContextNonAuthenticatedState = {
-  status: "guest" | "pending";
+  status: 'guest' | 'pending';
   user: null;
   token: null;
 };
 
-type AuthState =
-  | AuthContextAuthenticatedState
-  | AuthContextNonAuthenticatedState;
+type AuthState = AuthContextAuthenticatedState | AuthContextNonAuthenticatedState;
 
 export type AuthContextStore = AuthState & {
   // You can add methods for login, logout, etc. here if needed
 };
 
 export const AuthContext = createContext<AuthContextStore>({
-  status: "pending",
+  status: 'pending',
   user: null,
   token: null,
 });

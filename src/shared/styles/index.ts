@@ -1,1 +1,1 @@
-export * from "./cn.style";
+export * from './cn.style';

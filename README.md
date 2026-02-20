@@ -1,30 +1,11 @@
-﻿# vn-lms-ui
+# vn-lms-ui
 
 Frontend application for the internal Learning Management System (LMS).
 
 This repository contains the standalone frontend used to implement authentication,
 invite management, and learning platform user interfaces.
 
-## Contents
-
-- Overview
-- Tech Stack
-- Getting Started
-- Routes
-- Project Structure
-- Environment Variables
-- Scripts
-- Roadmap
-
-## Overview
-
-This repository provides the frontend foundation for the LMS platform, including:
-
-- Routing shell
-- Authentication context placeholder
-- Invite management UI (placeholder)
-- Accept invite UI (placeholder)
-- Login UI (placeholder)
+---
 
 ## Tech Stack
 
@@ -34,6 +15,22 @@ This repository provides the frontend foundation for the LMS platform, including
 - React Router
 - Tailwind CSS
 - shadcn/ui
+
+---
+
+## Project Purpose
+
+This repository provides the frontend foundation for the LMS platform, including:
+
+- Routing shell
+- Authentication context placeholder
+- Invite management UI (placeholder)
+- Accept invite UI (placeholder)
+- Login UI (placeholder)
+
+Future features will include course management, lessons, submissions, and analytics.
+
+---
 
 ## Getting Started
 
@@ -50,7 +47,9 @@ cd vn-lms-ui
 npm install
 ```
 
-### 3. Set up environment variables
+### 3. Setup environment variables
+
+Copy the example env file:
 
 ```bash
 cp .env.example .env
@@ -68,13 +67,17 @@ The application will be available at:
 http://localhost:5173
 ```
 
-## Routes (Sprint 1)
+---
 
-| Route | Description |
-| --- | --- |
-| `/login` | Login page (placeholder) |
+## Available Routes (Sprint 1)
+
+| Route            | Description                          |
+| ---------------- | ------------------------------------ |
+| `/login`         | Login page (placeholder)             |
 | `/admin/invites` | Invite management page (placeholder) |
-| `/accept-invite` | Accept invite page (placeholder) |
+| `/accept-invite` | Accept invite page (placeholder)     |
+
+---
 
 ## Project Structure
 
@@ -90,6 +93,8 @@ src/
   styles/
 ```
 
+---
+
 ## Environment Variables
 
 Defined in `.env.example`:
@@ -98,6 +103,8 @@ Defined in `.env.example`:
 VITE_API_BASE_URL
 VITE_PORT
 ```
+
+---
 
 ## Scripts
 
@@ -118,3 +125,16 @@ Preview production build:
 ```bash
 npm run preview
 ```
+
+---
+
+## Linting, Formatting & Git Hooks
+
+Check for lint errors: `npm run lint`
+Automatically fix lint issues: `npm run lint:fix`
+Check formatting: `npm run format:check`
+Fix formatting: `npm run format`
+Pre-commit: Runs `npx lint-staged`
+Pre-push: Runs frontend unit tests
+
+Hooks are installed automatically after: npm install

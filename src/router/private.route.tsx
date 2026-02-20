@@ -1,3 +1,3 @@
-import type { RouteObject } from "react-router";
+import type { RouteObject } from 'react-router';
 
 export const privateRoutes: RouteObject[] = [];
