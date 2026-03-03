@@ -10,3 +10,14 @@ export function lazyRoute<
     [name]: lazy(() => factory().then((module) => ({ default: module[name] }))),
   });
 }
+
+const SAFE_REDIRECT_PATHS = ['/dashboard', '/courses', '/profile', '/settings'] as const;
+
+export const DEFAULT_REDIRECT = SAFE_REDIRECT_PATHS[0];
+
+export function getSafeRedirect(redirect: string | null): string {
+  if (redirect && SAFE_REDIRECT_PATHS.some((p) => redirect.startsWith(p))) {
+    return redirect;
+  }
+  return DEFAULT_REDIRECT;
+}

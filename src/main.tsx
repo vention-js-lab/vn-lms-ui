@@ -1,3 +1,4 @@
+import '#/shared/styles/root.css';
 import { UnheadProvider } from '@unhead/react/client';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
