@@ -68,8 +68,8 @@ export function LoginRoute() {
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Link to="/request-invite" className=" w-full pl-2 block text-sm underline-offset-4 hover:underline">
-              Request an invite
+            <Link to="/resend-invite" className=" w-full pl-2 block text-sm underline-offset-4 hover:underline">
+              Resend an invite
             </Link>
           </CardFooter>
         </Card>
