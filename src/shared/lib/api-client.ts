@@ -36,7 +36,6 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
     throw new ApiError(response.status, data);
   }
 
-  // Handle 204 No Content
   if (response.status === 204) {
     return undefined as T;
   }
