@@ -4,11 +4,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '#/shared/components/ui/input';
 import { Label } from '#/shared/components/ui/label';
 import { Link } from 'react-router';
-import { useLoginForm } from '../hooks/use-login-form.hook';
-import loginBackground from '../assets/login.background.png';
+import { useLoginForm } from '#/modules/auth/hooks/use-login-form.hook';
+import loginBackground from '#/modules/auth/assets/login.background.png';
+import { ROUTES } from '#/router/routes';
 
 export function LoginRoute() {
-  const { email, setEmail, password, setPassword, isPending, isDisabled, errorMessage, handleSubmit } = useLoginForm();
+  const { form, onSubmit, isPending, errorMessage } = useLoginForm();
+  const {
+    register,
+    formState: { errors, isValid },
+  } = form;
 
   return (
     <section className="flex items-center justify-center w-screen ">
@@ -30,45 +35,34 @@ export function LoginRoute() {
                 <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
             )}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={isPending}
-                  />
+                  <Input id="email" type="email" placeholder="m@example.com" {...register('email')} disabled={isPending} />
+                  {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center  justify-between">
                     <Label htmlFor="password">Password</Label>
-                    <Link to="/forgot-password" className="inline-block text-sm underline-offset-4 hover:underline">
+                    <Link
+                      to={`${ROUTES.auth.forgotPassword}`}
+                      className="inline-block text-sm underline-offset-4 hover:underline"
+                    >
                       Forgot your password?
                     </Link>
                   </div>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={isPending}
-                  />
+                  <Input id="password" type="password" placeholder="••••••••" {...register('password')} disabled={isPending} />
+                  {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
                 </div>
-                <Button type="submit" className="w-full" disabled={isDisabled}>
+                <Button type="submit" className="w-full" disabled={!isValid || isPending}>
                   {isPending ? 'Signing in...' : 'Login'}
                 </Button>
               </div>
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Link to="/resend-invite" className=" w-full pl-2 block text-sm underline-offset-4 hover:underline">
+            <Link to={`${ROUTES.auth.resendInvite}`} className=" w-full pl-2 block text-sm underline-offset-4 hover:underline">
               Resend an invite
             </Link>
           </CardFooter>

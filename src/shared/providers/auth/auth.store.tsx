@@ -1,7 +1,15 @@
 import { create } from 'zustand';
+import { LOCAL_STORAGE } from './auth.storage';
+
+export const AuthStatus = {
+  AUTHENTICATED: 'authenticated',
+  GUEST: 'guest',
+} as const;
+
+export type AuthStatus = (typeof AuthStatus)[keyof typeof AuthStatus];
 
 type AuthenticatedState = {
-  status: 'authenticated';
+  status: typeof AuthStatus.AUTHENTICATED;
   user: {
     id: string;
     email: string;
@@ -10,7 +18,7 @@ type AuthenticatedState = {
 };
 
 type NonAuthenticatedState = {
-  status: 'guest';
+  status: typeof AuthStatus.GUEST;
   user: null;
   token: null;
 };
@@ -25,10 +33,10 @@ type AuthActions = {
 export type AuthStore = AuthState & AuthActions;
 
 function getInitialAuthState(): AuthState {
-  const token = localStorage.getItem('access_token');
+  const token = LOCAL_STORAGE.GET_ACCESS_TOKEN();
 
   if (!token) {
-    return { status: 'guest', user: null, token: null };
+    return { status: AuthStatus.GUEST, user: null, token: null };
   }
 
   try {
@@ -37,25 +45,23 @@ function getInitialAuthState(): AuthState {
       email: string;
     };
     return {
-      status: 'authenticated',
+      status: AuthStatus.AUTHENTICATED,
       user: { id: payload.sub, email: payload.email },
       token,
     };
   } catch {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    return { status: 'guest', user: null, token: null };
+    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
+    return { status: AuthStatus.GUEST, user: null, token: null };
   }
 }
 
 export const useAuthStore = create<AuthStore>()((set) => ({
   ...getInitialAuthState(),
   login: (token, user) => {
-    set({ status: 'authenticated', user, token });
+    set({ status: AuthStatus.AUTHENTICATED, user, token });
   },
   logout: () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    set({ status: 'guest', user: null, token: null });
+    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
+    set({ status: AuthStatus.GUEST, user: null, token: null });
   },
 }));

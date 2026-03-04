@@ -1,14 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import { authApi } from '../api';
 import type { LoginRequest } from '../types';
-import { useAuthStore } from '#/shared/providers/auth';
+import { LOCAL_STORAGE, useAuthStore } from '#/shared/providers/auth';
 
 export function useLoginMutation() {
   return useMutation({
     mutationFn: (data: LoginRequest) => authApi.login(data),
     onSuccess: (data) => {
-      localStorage.setItem('access_token', data.accessToken);
-      localStorage.setItem('refresh_token', data.refreshToken);
+      LOCAL_STORAGE.SET_ACCESS_TOKEN(data.accessToken);
 
       useAuthStore.getState().login(data.accessToken, data.user);
     },

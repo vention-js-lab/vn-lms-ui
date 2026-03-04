@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { ROUTES } from '#/router/routes';
 
 export function lazyRoute<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,7 +12,7 @@ export function lazyRoute<
   });
 }
 
-const SAFE_REDIRECT_PATHS = ['/dashboard', '/courses', '/profile', '/settings'] as const;
+const SAFE_REDIRECT_PATHS = [ROUTES.dashboard, ROUTES.courses, ROUTES.profile, ROUTES.settings] as const;
 
 export const DEFAULT_REDIRECT = SAFE_REDIRECT_PATHS[0];
 
