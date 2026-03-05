@@ -17,7 +17,6 @@ dist-ssr
 # Branch documentation directories and files
 docs
 *.md
-*.png
 *.jpg
 
 # Editor directories and files
