@@ -5,8 +5,4 @@ export type LoginRequest = {
 
 export type LoginResponse = {
   accessToken: string;
-  user: {
-    id: string;
-    email: string;
-  };
 };
