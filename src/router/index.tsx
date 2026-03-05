@@ -1,18 +1,14 @@
 import { createBrowserRouter, Outlet } from 'react-router';
 import { privateRoutes } from './private.route';
 import { publicRoutes } from './public.router';
-import { AuthProvider } from '#/shared/providers/auth';
+import { ROUTES } from './routes';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTES.ROOT,
     id: 'root',
     Component: () => {
-      return (
-        <AuthProvider>
-          <Outlet />
-        </AuthProvider>
-      );
+      return <Outlet />;
     },
     children: [...publicRoutes, ...privateRoutes],
   },

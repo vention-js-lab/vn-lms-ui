@@ -1,7 +1,15 @@
-import { createContext } from 'react';
+import { create } from 'zustand';
+import { LOCAL_STORAGE } from './auth.storage';
 
-type AuthContextAuthenticatedState = {
-  status: 'authenticated';
+export const AuthStatus = {
+  AUTHENTICATED: 'authenticated',
+  GUEST: 'guest',
+} as const;
+
+export type AuthStatus = (typeof AuthStatus)[keyof typeof AuthStatus];
+
+type AuthenticatedState = {
+  status: typeof AuthStatus.AUTHENTICATED;
   user: {
     id: string;
     email: string;
@@ -9,20 +17,51 @@ type AuthContextAuthenticatedState = {
   token: string;
 };
 
-type AuthContextNonAuthenticatedState = {
-  status: 'guest' | 'pending';
+type NonAuthenticatedState = {
+  status: typeof AuthStatus.GUEST;
   user: null;
   token: null;
 };
 
-type AuthState = AuthContextAuthenticatedState | AuthContextNonAuthenticatedState;
+type AuthState = AuthenticatedState | NonAuthenticatedState;
 
-export type AuthContextStore = AuthState & {
-  // You can add methods for login, logout, etc. here if needed
+type AuthActions = {
+  login: (token: string, user: { id: string; email: string }) => void;
+  logout: () => void;
 };
 
-export const AuthContext = createContext<AuthContextStore>({
-  status: 'pending',
-  user: null,
-  token: null,
-});
+export type AuthStore = AuthState & AuthActions;
+
+function getInitialAuthState(): AuthState {
+  const token = LOCAL_STORAGE.GET_ACCESS_TOKEN();
+
+  if (!token) {
+    return { status: AuthStatus.GUEST, user: null, token: null };
+  }
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1])) as {
+      sub: string;
+      email: string;
+    };
+    return {
+      status: AuthStatus.AUTHENTICATED,
+      user: { id: payload.sub, email: payload.email },
+      token,
+    };
+  } catch {
+    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
+    return { status: AuthStatus.GUEST, user: null, token: null };
+  }
+}
+
+export const useAuthStore = create<AuthStore>()((set) => ({
+  ...getInitialAuthState(),
+  login: (token, user) => {
+    set({ status: AuthStatus.AUTHENTICATED, user, token });
+  },
+  logout: () => {
+    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
+    set({ status: AuthStatus.GUEST, user: null, token: null });
+  },
+}));
