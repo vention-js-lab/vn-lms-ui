@@ -6,4 +6,7 @@ export const API_ENDPOINTS = {
     FORGOT_PASSWORD: '/auth/forgot-password',
     ACCEPT_INVITE: '/auth/accept-invite',
   },
+  INVITE: {
+    BY_TOKEN: '/invites/invite-by-token',
+  },
 };

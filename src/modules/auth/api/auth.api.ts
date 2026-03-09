@@ -4,4 +4,5 @@ import type { LoginRequest, LoginResponse } from '../types';
 
 export const authApi = {
   login: (data: LoginRequest) => apiClient.post<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, data),
+  inviteByToken: (token: string) => apiClient.get(API_ENDPOINTS.INVITE.BY_TOKEN, { params: { token } }),
 };
