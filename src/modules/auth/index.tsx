@@ -12,10 +12,6 @@ export const authRoutes: RouteObject[] = [
     element: <LoginRoute />,
   },
   {
-    path: ROUTES.AUTH.LOGIN,
-    element: <LoginRoute />,
-  },
-  {
     path: ROUTES.AUTH.ACCEPT_INVITE,
     element: <AcceptInviteRoute />,
   },
