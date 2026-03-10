@@ -32,7 +32,7 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
     });
     const queryString = searchParams.toString();
     if (queryString) {
-      url += `?${queryString}`;
+      url += (url.includes('?') ? '&' : '?') + queryString;
     }
   }
 

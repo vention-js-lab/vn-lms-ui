@@ -28,7 +28,7 @@ export default function ErrorPage({
           <AlertDescription>{message}</AlertDescription>
         </Alert>
 
-        <Button onClick={() => navigate(navigateTo)} className="w-full">
+        <Button onClick={() => navigate(navigateTo ?? -1)} className="w-full">
           {goBackText}
         </Button>
       </div>

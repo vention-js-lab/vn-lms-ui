@@ -5,6 +5,6 @@ export type LoginRequest = {
 
 export type LoginResponse = {
   accessToken: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
+  refreshToken: string;
+  user: { id: string; email: string };
 };

@@ -45,8 +45,10 @@ export function InviteByTokenRoute() {
   const acceptInviteMutation = useMutation({
     mutationFn: (values: AcceptInviteFormValues) => authApi.acceptInvite(token, values.password),
     onSuccess: (res) => {
-      alert(res.message);
-      navigate(ROUTES.AUTH.LOGIN, { replace: true });
+      navigate(ROUTES.AUTH.LOGIN, {
+        replace: true,
+        state: { successMessage: res.message },
+      });
     },
   });
 
@@ -61,7 +63,7 @@ export function InviteByTokenRoute() {
       <Error
         message="Invalid invite link. No token provided."
         navigateTo={ROUTES.AUTH.LOGIN}
-        status={500}
+        status={404}
         goBackText="Go back to login"
       />
     );
@@ -84,7 +86,14 @@ export function InviteByTokenRoute() {
   }
 
   if (isError || !data) {
-    return <Error message={error?.message} navigateTo={ROUTES.AUTH.LOGIN} status={400} goBackText="Go back to login" />;
+    return (
+      <Error
+        message={getErrorMessage(error) || 'Failed to validate invite link.'}
+        navigateTo={ROUTES.AUTH.LOGIN}
+        status={400}
+        goBackText="Go back to login"
+      />
+    );
   }
 
   if (data.used_at) {
@@ -100,7 +109,7 @@ export function InviteByTokenRoute() {
 
   if (data.expires_at && new Date(data.expires_at) < new Date()) {
     return (
-      <Error message="The token has already been expired." navigateTo={ROUTES.AUTH.LOGIN} status={400} goBackText="Go to login" />
+      <Error message="The token has already expired." navigateTo={ROUTES.AUTH.LOGIN} status={400} goBackText="Go to login" />
     );
   }
 

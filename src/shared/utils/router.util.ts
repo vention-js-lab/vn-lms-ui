@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { ROUTES } from '../constants';
+import { ROUTES } from '#/shared/constants';
 
 export function lazyRoute<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
