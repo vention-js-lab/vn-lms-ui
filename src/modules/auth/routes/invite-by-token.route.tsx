@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '#/shared/components/ui/input';
 import { Label } from '#/shared/components/ui/label';
 import { ROUTES } from '#/shared/constants';
-import { getErrorMessage } from '#/shared/lib/api-client';
+import { getError } from '#/shared/lib/api-client';
 import loginBackground from '../assets/login.background.png';
 import { authApi } from '../api';
 import { useInviteByToken } from '../hooks/queries';
@@ -56,14 +56,14 @@ export function InviteByTokenRoute() {
     acceptInviteMutation.mutate(values);
   });
 
-  const backendErrorMessage = acceptInviteMutation.isError ? getErrorMessage(acceptInviteMutation.error) : null;
+  const backendErrorMessage = acceptInviteMutation.isError ? getError(acceptInviteMutation.error, 'message') : null;
 
   if (!token) {
     return (
       <Error
         message="Invalid invite link. No token provided."
         navigateTo={ROUTES.AUTH.LOGIN}
-        status={404}
+        status="404"
         goBackText="Go back to login"
       />
     );
@@ -88,37 +88,9 @@ export function InviteByTokenRoute() {
   if (isError || !data) {
     return (
       <Error
-        message={getErrorMessage(error) || 'Failed to validate invite link.'}
+        message={getError(error, 'message')}
         navigateTo={ROUTES.AUTH.LOGIN}
-        status={400}
-        goBackText="Go back to login"
-      />
-    );
-  }
-
-  if (data.used_at) {
-    return (
-      <Error
-        message="The token has already been used."
-        navigateTo={ROUTES.AUTH.LOGIN}
-        status={400}
-        goBackText="Go back to login"
-      />
-    );
-  }
-
-  if (data.expires_at && new Date(data.expires_at) < new Date()) {
-    return (
-      <Error message="The token has already expired." navigateTo={ROUTES.AUTH.LOGIN} status={400} goBackText="Go to login" />
-    );
-  }
-
-  if (data.revoked_at) {
-    return (
-      <Error
-        message="The token has already been revoked."
-        navigateTo={ROUTES.AUTH.LOGIN}
-        status={400}
+        status={getError(error, 'statusCode')}
         goBackText="Go back to login"
       />
     );

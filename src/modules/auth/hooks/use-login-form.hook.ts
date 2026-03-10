@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useLoginMutation } from './use-login.mutation';
-import { getErrorMessage } from '#/shared/lib/api-client';
+import { getError } from '#/shared/lib/api-client';
 import { getSafeRedirect } from '#/shared/utils/router.util';
 
 const loginSchema = z.object({
@@ -35,7 +35,7 @@ export function useLoginForm() {
     });
   }
 
-  const errorMessage = loginMutation.isError ? getErrorMessage(loginMutation.error) : null;
+  const errorMessage = loginMutation.isError ? getError(loginMutation.error, 'message') : null;
 
   return {
     form,

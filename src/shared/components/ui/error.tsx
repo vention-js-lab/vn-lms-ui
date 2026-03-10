@@ -4,14 +4,14 @@ import { AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 type Props = {
-  status?: number;
+  status?: string;
   message?: string;
   navigateTo?: string;
   goBackText?: string;
 };
 
 export default function ErrorPage({
-  status = 404,
+  status = '404',
   message = "The page you were looking for doesn't exist.",
   navigateTo = '',
   goBackText = 'Go back home',

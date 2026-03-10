@@ -73,11 +73,27 @@ export const apiClient = {
   delete: <T>(endpoint: string, options?: RequestOptions) => request<T>(endpoint, { ...options, method: 'DELETE' }),
 };
 
-export function getErrorMessage(error: unknown): string {
+export function getError(error: unknown, value: 'error' | 'message' | 'statusCode'): string {
   if (error instanceof ApiError) {
-    const data = error.data as { message?: string } | null;
-    if (data?.message) return data.message;
-    return 'Something went wrong. Please try again later.';
+    const data = error.data as { message?: string; type?: string; statusCode?: number } | null;
+
+    if (value === 'statusCode') {
+      return String(data?.statusCode);
+    }
+
+    if (value === 'error') {
+      return data?.type || 'error';
+    }
+
+    return data?.message || 'Something went wrong. Please try again later.';
+  }
+
+  if (value === 'statusCode') {
+    return '500';
+  }
+
+  if (value === 'error') {
+    return 'error';
   }
 
   return 'Unable to connect. Please check your internet connection.';
