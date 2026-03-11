@@ -20,7 +20,7 @@ type NonAuthenticatedState = {
 type AuthState = AuthenticatedState | NonAuthenticatedState;
 
 type AuthActions = {
-  login: (token: string, user: { id: string; email: string }) => void;
+  login: (token: string, user?: { id: string; email: string }) => void;
   logout: () => void;
 };
 
