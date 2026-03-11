@@ -14,14 +14,29 @@ export class ApiError extends Error {
 
 type RequestOptions = Omit<RequestInit, 'body'> & {
   body?: unknown;
+  params?: Record<string, string | number | boolean | undefined>;
 };
 
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
-  const { body, headers, ...rest } = options;
+  const { body, headers, params, ...rest } = options;
 
   const token = localStorage.getItem('access_token');
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  let url = `${BASE_URL}${endpoint}`;
+  if (params) {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined) {
+        searchParams.append(key, String(value));
+      }
+    });
+    const queryString = searchParams.toString();
+    if (queryString) {
+      url += (url.includes('?') ? '&' : '?') + queryString;
+    }
+  }
+
+  const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -58,11 +73,27 @@ export const apiClient = {
   delete: <T>(endpoint: string, options?: RequestOptions) => request<T>(endpoint, { ...options, method: 'DELETE' }),
 };
 
-export function getErrorMessage(error: unknown): string {
+export function getError(error: unknown, value: 'error' | 'message' | 'statusCode'): string {
   if (error instanceof ApiError) {
-    const data = error.data as { message?: string } | null;
-    if (data?.message) return data.message;
-    return 'Something went wrong. Please try again later.';
+    const data = error.data as { message?: string; type?: string; statusCode?: number } | null;
+
+    if (value === 'statusCode') {
+      return String(data?.statusCode);
+    }
+
+    if (value === 'error') {
+      return data?.type || 'error';
+    }
+
+    return data?.message || 'Something went wrong. Please try again later.';
+  }
+
+  if (value === 'statusCode') {
+    return '500';
+  }
+
+  if (value === 'error') {
+    return 'error';
   }
 
   return 'Unable to connect. Please check your internet connection.';

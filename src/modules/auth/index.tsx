@@ -3,23 +3,28 @@ import { LoginRoute } from '#/modules/auth/routes/login.route';
 import { AcceptInviteRoute } from '#/modules/auth/routes/accept-invite.route';
 import { ForgotPasswordRoute } from '#/modules/auth/routes/forgot-password.route';
 import { ResendInviteRoute } from '#/modules/auth/routes/resend-invite.route';
-import { ROUTES } from '#/router/routes';
+import { ROUTES } from '#/shared/constants';
+import { InviteByTokenRoute } from './routes/invite-by-token.route';
 
 export const authRoutes: RouteObject[] = [
   {
-    path: ROUTES.auth.login,
+    path: ROUTES.AUTH.LOGIN,
     element: <LoginRoute />,
   },
   {
-    path: ROUTES.auth.acceptInvite,
+    path: ROUTES.AUTH.ACCEPT_INVITE,
     element: <AcceptInviteRoute />,
   },
   {
-    path: ROUTES.auth.forgotPassword,
+    path: ROUTES.AUTH.INVITE_BY_TOKEN,
+    element: <InviteByTokenRoute />,
+  },
+  {
+    path: ROUTES.AUTH.FORGOT_PASSWORD,
     element: <ForgotPasswordRoute />,
   },
   {
-    path: ROUTES.auth.resendInvite,
+    path: ROUTES.AUTH.RESEND_INVITE,
     element: <ResendInviteRoute />,
   },
 ];

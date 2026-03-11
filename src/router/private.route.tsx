@@ -1,13 +1,17 @@
 import type { RouteObject } from 'react-router';
 import { AuthGuard } from './auth.guard';
-import { ROUTES } from './routes';
+import { ROUTES } from '#/shared/constants';
 
 export const privateRoutes: RouteObject[] = [
   {
     Component: AuthGuard,
     children: [
       {
-        path: ROUTES.dashboard,
+        path: ROUTES.ROOT,
+        lazy: () => import('#/modules/root').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: ROUTES.DASHBOARD,
         lazy: () => import('#/modules/dashboard').then((m) => ({ Component: m.DashboardRoute })),
       },
     ],
