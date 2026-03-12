@@ -1,17 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useLoginMutation } from './use-login.mutation';
 import { getError } from '#/shared/lib/api-client';
 import { getSafeRedirect } from '#/shared/utils/router.util';
-
-const loginSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Please enter a valid email'),
-  password: z.string().min(1, 'Password is required'),
-});
-
-export type LoginFormValues = z.infer<typeof loginSchema>;
+import { loginSchema, type LoginFormValues } from '#/shared/schemas';
 
 export function useLoginForm() {
   const navigate = useNavigate();

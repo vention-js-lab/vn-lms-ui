@@ -7,6 +7,9 @@ export const ROUTES = {
     FORGOT_PASSWORD: '/forgot-password',
     RESEND_INVITE: '/resend-invite',
   },
+  INVITE: {
+    MANAGEMENT: '/invite-management',
+  },
   DASHBOARD: '/dashboard',
   COURSES: '/courses',
   PROFILE: '/profile',
