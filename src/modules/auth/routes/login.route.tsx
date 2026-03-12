@@ -16,15 +16,15 @@ export function LoginRoute() {
   } = form;
 
   return (
-    <section className="flex items-center justify-center w-screen ">
+    <section className="flex w-screen items-center justify-center">
       <div
-        className="w-1/2 min-h-screen flex items-center justify-center bg-cover bg-center opacity-65 bg-no-repeat"
+        className="flex min-h-screen w-1/2 items-center justify-center bg-cover bg-center bg-no-repeat opacity-65"
         style={{ backgroundImage: `url(${loginBackground})` }}
       >
-        <CardTitle className="text-white text-4xl ">Welcome to LMS Platform</CardTitle>
+        <CardTitle className="text-4xl text-white">Welcome to LMS Platform</CardTitle>
       </div>
-      <div className="flex items-center justify-center min-h-screen w-1/2  bg-white">
-        <Card className="w-full max-w-sm border-0 shadow-none ">
+      <div className="flex min-h-screen w-1/2 items-center justify-center bg-white">
+        <Card className="w-full max-w-sm border-0 shadow-none">
           <CardHeader>
             <CardTitle className="text-center">Welcome Back</CardTitle>
             <CardDescription className="text-center">Sign in to your LMS account to continue</CardDescription>
@@ -40,10 +40,10 @@ export function LoginRoute() {
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input id="email" type="email" placeholder="m@example.com" {...register('email')} disabled={isPending} />
-                  {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+                  {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
                 </div>
                 <div className="grid gap-2">
-                  <div className="flex items-center  justify-between">
+                  <div className="flex items-center justify-between">
                     <Label htmlFor="password">Password</Label>
                     <Link
                       to={`${ROUTES.auth.forgotPassword}`}
@@ -53,7 +53,7 @@ export function LoginRoute() {
                     </Link>
                   </div>
                   <Input id="password" type="password" placeholder="••••••••" {...register('password')} disabled={isPending} />
-                  {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+                  {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
                 </div>
                 <Button type="submit" className="w-full" disabled={!isValid || isPending}>
                   {isPending ? 'Signing in...' : 'Login'}
@@ -62,7 +62,7 @@ export function LoginRoute() {
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Link to={`${ROUTES.auth.resendInvite}`} className=" w-full pl-2 block text-sm underline-offset-4 hover:underline">
+            <Link to={`${ROUTES.auth.resendInvite}`} className="block w-full pl-2 text-sm underline-offset-4 hover:underline">
               Resend an invite
             </Link>
           </CardFooter>
