@@ -15,6 +15,7 @@ import { useInviteByToken } from '../hooks/queries';
 import Error from '#/shared/components/ui/error';
 import { Spinner } from '#/shared/components/ui/spinner';
 import { acceptInviteSchema, type AcceptInviteFormValues } from '#/shared/schemas';
+import toast from 'react-hot-toast';
 
 export function InviteByTokenRoute() {
   const navigate = useNavigate();
@@ -43,6 +44,11 @@ export function InviteByTokenRoute() {
         replace: true,
         state: { successMessage: res.message },
       });
+      toast.success(res.message);
+    },
+    onError: (error) => {
+      const message = getError(error, 'message');
+      toast.error(message);
     },
   });
 

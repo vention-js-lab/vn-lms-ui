@@ -5,6 +5,7 @@ import { useLoginMutation } from './use-login.mutation';
 import { getError } from '#/shared/lib/api-client';
 import { getSafeRedirect } from '#/shared/utils/router.util';
 import { loginSchema, type LoginFormValues } from '#/shared/schemas';
+import toast from 'react-hot-toast';
 
 export function useLoginForm() {
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ export function useLoginForm() {
       onSuccess: () => {
         const target = getSafeRedirect(searchParams.get('redirect'));
         navigate(target, { replace: true });
+      },
+      onError: (error) => {
+        const message = getError(error, 'message');
+        toast.error(message);
       },
     });
   }

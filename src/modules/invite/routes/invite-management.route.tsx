@@ -1,4 +1,3 @@
-import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -9,13 +8,14 @@ import { Input } from '#/shared/components/ui/input';
 import { Label } from '#/shared/components/ui/label';
 import { getError } from '#/shared/lib/api-client';
 import { authApi } from '#/modules/auth/api';
-import { inviteSchema, type InviteFormValues } from '#/shared/schemas';
+import { createInviteSchema, type CreateInviteFormValues } from '#/shared/schemas';
+import toast from 'react-hot-toast';
 
 export default function InviteManagementRoute() {
-  const form = useForm<InviteFormValues>({
-    resolver: zodResolver(inviteSchema),
+  const form = useForm<CreateInviteFormValues>({
+    resolver: zodResolver(createInviteSchema),
     mode: 'onChange',
-    defaultValues: { first_name: '', last_name: '', email: '', role: 'student' },
+    defaultValues: { firstName: '', lastName: '', email: '', role: 'student' },
   });
 
   const {
@@ -26,14 +26,16 @@ export default function InviteManagementRoute() {
   } = form;
 
   const inviteMutation = useMutation({
-    mutationFn: (values: InviteFormValues) => authApi.createInvite(values),
+    mutationFn: (values: CreateInviteFormValues) => authApi.createInvite(values),
     onSuccess: (_res, vars) => {
-      setSuccessMessage(`Invite sent to ${vars.email}`);
+      toast.success(`Invite sent to ${vars.email}`);
       reset();
     },
+    onError: (error) => {
+      const message = getError(error, 'message');
+      toast.error(message);
+    },
   });
-
-  const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
 
   const backendError = inviteMutation.isError ? getError(inviteMutation.error, 'message') : null;
 
@@ -55,24 +57,18 @@ export default function InviteManagementRoute() {
               </Alert>
             )}
 
-            {successMessage && (
-              <Alert className="mb-4">
-                <AlertDescription>{successMessage} </AlertDescription>
-              </Alert>
-            )}
-
             <form onSubmit={onSubmit}>
               <div className="flex flex-col gap-8">
                 <div className="grid gap-2">
                   <Label htmlFor="firstName"> First Name </Label>
-                  <Input id="firstName" placeholder="Enter first name" {...register('first_name')} />
-                  {errors.first_name && <p className="text-sm text-destructive"> {errors.first_name.message} </p>}
+                  <Input id="firstName" placeholder="Enter first name" {...register('firstName')} />
+                  {errors.firstName && <p className="text-sm text-destructive"> {errors.firstName.message} </p>}
                 </div>
 
                 <div className="grid gap-2">
                   <Label htmlFor="lastName"> Last Name </Label>
-                  <Input id="lastName" placeholder="Enter last name" {...register('last_name')} />
-                  {errors.last_name && <p className="text-sm text-destructive"> {errors.last_name.message} </p>}
+                  <Input id="lastName" placeholder="Enter last name" {...register('lastName')} />
+                  {errors.lastName && <p className="text-sm text-destructive"> {errors.lastName.message} </p>}
                 </div>
 
                 <div className="grid gap-2">
