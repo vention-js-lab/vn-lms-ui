@@ -6,4 +6,7 @@ export const ENDPOINTS = {
     forgotPassword: '/auth/forgot-password',
     acceptInvite: '/auth/accept-invite',
   },
+  courses: {
+    create: '/courses',
+  },
 };
