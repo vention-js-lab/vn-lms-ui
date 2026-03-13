@@ -12,7 +12,7 @@ export function lazyRoute<
   });
 }
 
-const SAFE_REDIRECT_PATHS = [ROUTES.dashboard, ROUTES.courses, ROUTES.profile, ROUTES.settings] as const;
+const SAFE_REDIRECT_PATHS = [ROUTES.dashboard, ROUTES.courses.root, ROUTES.profile, ROUTES.settings] as const;
 
 export const DEFAULT_REDIRECT = SAFE_REDIRECT_PATHS[0];
 

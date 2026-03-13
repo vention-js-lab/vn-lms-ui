@@ -17,6 +17,7 @@ dist-ssr
 # Branch documentation directories and files
 docs
 *.md
+!PULL_REQUEST_TEMPLATE.md
 *.jpg
 
 # Editor directories and files

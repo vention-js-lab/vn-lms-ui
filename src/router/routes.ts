@@ -7,7 +7,10 @@ export const ROUTES = {
     resendInvite: '/resend-invite',
   },
   dashboard: '/dashboard',
-  courses: '/courses',
+  courses: {
+    root: '/courses',
+    create: '/courses/create',
+  },
   profile: '/profile',
   settings: '/settings',
 };
