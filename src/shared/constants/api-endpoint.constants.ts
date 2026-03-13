@@ -10,4 +10,7 @@ export const API_ENDPOINTS = {
     CREATE: '/invites',
     ACCEPT_INVITE: '/invites/accept-invite',
   },
+  COURSE:{
+    CREATE:'/courses/create'
+  }
 };
