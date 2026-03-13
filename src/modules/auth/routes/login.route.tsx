@@ -6,7 +6,7 @@ import { Label } from '#/shared/components/ui/label';
 import { Link } from 'react-router';
 import { useLoginForm } from '#/modules/auth/hooks/use-login-form.hook';
 import loginBackground from '#/modules/auth/assets/login.background.png';
-import { ROUTES } from '#/router/routes';
+import { ROUTES } from '#/shared/constants';
 
 export function LoginRoute() {
   const { form, onSubmit, isPending, errorMessage } = useLoginForm();
@@ -45,10 +45,7 @@ export function LoginRoute() {
                 <div className="grid gap-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password">Password</Label>
-                    <Link
-                      to={`${ROUTES.auth.forgotPassword}`}
-                      className="inline-block text-sm underline-offset-4 hover:underline"
-                    >
+                    <Link to={ROUTES.AUTH.FORGOT_PASSWORD} className="inline-block text-sm underline-offset-4 hover:underline">
                       Forgot your password?
                     </Link>
                   </div>
@@ -62,7 +59,7 @@ export function LoginRoute() {
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-2">
-            <Link to={`${ROUTES.auth.resendInvite}`} className="block w-full pl-2 text-sm underline-offset-4 hover:underline">
+            <Link to={ROUTES.AUTH.RESEND_INVITE} className="block w-full pl-2 text-sm underline-offset-4 hover:underline">
               Resend an invite
             </Link>
           </CardFooter>

@@ -1,12 +1,6 @@
 import { create } from 'zustand';
 import { LOCAL_STORAGE } from './auth.storage';
-
-export const AuthStatus = {
-  AUTHENTICATED: 'authenticated',
-  GUEST: 'guest',
-} as const;
-
-export type AuthStatus = (typeof AuthStatus)[keyof typeof AuthStatus];
+import { AuthStatus } from '#/shared/constants';
 
 type AuthenticatedState = {
   status: typeof AuthStatus.AUTHENTICATED;

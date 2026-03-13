@@ -1,12 +1,12 @@
 import { createBrowserRouter, Outlet } from 'react-router';
 import { privateRoutes } from './private.route';
 import { publicRoutes } from './public.router';
-import { ROUTES } from './routes';
+import { ROUTES } from '#/shared/constants';
 
 export const router = createBrowserRouter([
   {
     path: ROUTES.ROOT,
-    id: 'root',
+    id: ROUTES.ROOT,
     Component: () => {
       return <Outlet />;
     },

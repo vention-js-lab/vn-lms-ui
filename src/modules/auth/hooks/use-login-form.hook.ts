@@ -1,17 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useLoginMutation } from './use-login.mutation';
-import { getErrorMessage } from '#/shared/lib/api-client';
+import { getError } from '#/shared/lib/api-client';
 import { getSafeRedirect } from '#/shared/utils/router.util';
-
-const loginSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Please enter a valid email'),
-  password: z.string().min(1, 'Password is required'),
-});
-
-export type LoginFormValues = z.infer<typeof loginSchema>;
+import { loginSchema, type LoginFormValues } from '#/shared/schemas';
+import toast from 'react-hot-toast';
 
 export function useLoginForm() {
   const navigate = useNavigate();
@@ -32,10 +26,14 @@ export function useLoginForm() {
         const target = getSafeRedirect(searchParams.get('redirect'));
         navigate(target, { replace: true });
       },
+      onError: (error) => {
+        const message = getError(error, 'message');
+        toast.error(message);
+      },
     });
   }
 
-  const errorMessage = loginMutation.isError ? getErrorMessage(loginMutation.error) : null;
+  const errorMessage = loginMutation.isError ? getError(loginMutation.error, 'message') : null;
 
   return {
     form,

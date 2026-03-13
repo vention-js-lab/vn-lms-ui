@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router';
 import { useAuth } from '#/shared/providers/auth';
-import { AuthStatus } from '#/shared/providers/auth/auth.store';
 import { DEFAULT_REDIRECT } from '#/shared/utils/router.util';
+import { AuthStatus } from '#/shared/constants';
 
 export function GuestGuard() {
   const auth = useAuth();

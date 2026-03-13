@@ -6,6 +6,7 @@ import { headConfig, queryClientConfig } from '#/shared/configs';
 import { router } from '#/router';
 import { RouterProvider } from 'react-router';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const root = document.getElementById('root');
 if (!root) {
@@ -17,6 +18,7 @@ createRoot(root).render(
     <UnheadProvider head={headConfig}>
       <QueryClientProvider client={queryClientConfig}>
         <RouterProvider router={router} />
+        <Toaster position="top-center" reverseOrder={false} />
       </QueryClientProvider>
     </UnheadProvider>
   </StrictMode>,
