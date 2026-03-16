@@ -14,6 +14,10 @@ export const privateRoutes: RouteObject[] = [
         path: ROUTES.DASHBOARD,
         lazy: () => import('#/modules/dashboard').then((m) => ({ Component: m.DashboardRoute })),
       },
+      {
+        path: ROUTES.INVITE.MANAGEMENT,
+        lazy: () => import('#/modules/invite/routes/invite-management.route').then((m) => ({ Component: m.default })),
+      },
     ],
   },
 ];

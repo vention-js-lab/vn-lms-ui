@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useSearchParams } from 'react-router';
-import { z } from 'zod';
 import { Alert, AlertDescription } from '#/shared/components/ui/alert';
 import { Button } from '#/shared/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/shared/components/ui/card';
@@ -15,12 +14,8 @@ import { authApi } from '../api';
 import { useInviteByToken } from '../hooks/queries';
 import Error from '#/shared/components/ui/error';
 import { Spinner } from '#/shared/components/ui/spinner';
-
-const acceptInviteSchema = z.object({
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-});
-
-type AcceptInviteFormValues = z.infer<typeof acceptInviteSchema>;
+import { acceptInviteSchema, type AcceptInviteFormValues } from '#/shared/schemas';
+import toast from 'react-hot-toast';
 
 export function InviteByTokenRoute() {
   const navigate = useNavigate();
@@ -49,6 +44,11 @@ export function InviteByTokenRoute() {
         replace: true,
         state: { successMessage: res.message },
       });
+      toast.success(res.message);
+    },
+    onError: (error) => {
+      const message = getError(error, 'message');
+      toast.error(message);
     },
   });
 

@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   },
   INVITE: {
     BY_TOKEN: '/invites/invite-by-token',
+    CREATE: '/invites',
     ACCEPT_INVITE: '/invites/accept-invite',
   },
 };
