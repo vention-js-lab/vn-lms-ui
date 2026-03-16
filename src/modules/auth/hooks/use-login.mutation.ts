@@ -9,7 +9,7 @@ export function useLoginMutation() {
     onSuccess: (data) => {
       LOCAL_STORAGE.SET_ACCESS_TOKEN(data.accessToken);
 
-      useAuthStore.getState().login(data.accessToken, data.user);
+      useAuthStore.getState().login(data.accessToken);
     },
   });
 }
