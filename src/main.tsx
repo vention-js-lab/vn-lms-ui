@@ -18,7 +18,7 @@ createRoot(root).render(
     <UnheadProvider head={headConfig}>
       <QueryClientProvider client={queryClientConfig}>
         <RouterProvider router={router} />
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} reverseOrder={false} />
       </QueryClientProvider>
     </UnheadProvider>
   </StrictMode>,

@@ -1,6 +1,8 @@
 import type { RouteObject } from 'react-router';
 import { AuthGuard } from './auth.guard';
 import { ROUTES } from '#/shared/constants';
+import Courses from '#/modules/courses/components';
+import { coursesRoutes } from '#/modules/courses';
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -17,6 +19,11 @@ export const privateRoutes: RouteObject[] = [
       {
         path: ROUTES.INVITE.MANAGEMENT,
         lazy: () => import('#/modules/invite/routes/invite-management.route').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: ROUTES.COURSES.ROOT,
+        Component: Courses,
+        children: [...coursesRoutes],
       },
     ],
   },

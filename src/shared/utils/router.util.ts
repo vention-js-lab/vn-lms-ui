@@ -12,8 +12,7 @@ export function lazyRoute<
   });
 }
 
-const SAFE_REDIRECT_PATHS = [ROUTES.DASHBOARD, ROUTES.COURSES, ROUTES.PROFILE, ROUTES.SETTINGS];
-
+const SAFE_REDIRECT_PATHS = [ROUTES.DASHBOARD, ROUTES.COURSES.ROOT, ROUTES.PROFILE, ROUTES.SETTINGS];
 export const DEFAULT_REDIRECT = SAFE_REDIRECT_PATHS[0];
 
 export function getSafeRedirect(redirect: string | null): string {
