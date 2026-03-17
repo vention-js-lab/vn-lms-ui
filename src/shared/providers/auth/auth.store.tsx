@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { LOCAL_STORAGE } from './auth.storage';
+import { tokenStore } from './auth.storage';
 import { AuthStatus } from '#/shared/constants';
 
 type AuthenticatedState = {
@@ -26,36 +26,16 @@ type AuthActions = {
 
 export type AuthStore = AuthState & AuthActions;
 
-function getInitialAuthState(): AuthState {
-  const token = LOCAL_STORAGE.GET_ACCESS_TOKEN();
-
-  if (!token) {
-    return { status: AuthStatus.GUEST, user: null, token: null };
-  }
-
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1])) as {
-      sub: string;
-      email: string;
-    };
-    return {
-      status: AuthStatus.AUTHENTICATED,
-      user: { id: payload.sub, email: payload.email },
-      token,
-    };
-  } catch {
-    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
-    return { status: AuthStatus.GUEST, user: null, token: null };
-  }
-}
+const INITIAL_GUEST_STATE: AuthState = { status: AuthStatus.GUEST, user: null, token: null };
 
 export const useAuthStore = create<AuthStore>()((set) => ({
-  ...getInitialAuthState(),
+  ...INITIAL_GUEST_STATE,
   login: (token, user) => {
-    set({ status: AuthStatus.AUTHENTICATED, user, token });
+    tokenStore.setAccessToken(token);
+    set({ status: AuthStatus.AUTHENTICATED, user: user ?? { id: '', email: '' }, token });
   },
   logout: () => {
-    LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
+    tokenStore.clearAccessToken();
     set({ status: AuthStatus.GUEST, user: null, token: null });
   },
 }));

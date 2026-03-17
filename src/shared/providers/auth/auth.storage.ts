@@ -1,9 +1,11 @@
-export class LOCAL_STORAGE {
-  static SET_ACCESS_TOKEN(token: string | null) {
-    localStorage.setItem('access_token', token || '');
-  }
+let accessToken: string | null = null;
 
-  static GET_ACCESS_TOKEN() {
-    return localStorage.getItem('access_token');
-  }
-}
+export const tokenStore = {
+  getAccessToken: () => accessToken,
+  setAccessToken: (token: string | null) => {
+    accessToken = token;
+  },
+  clearAccessToken: () => {
+    accessToken = null;
+  },
+};

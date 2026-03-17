@@ -4,7 +4,7 @@ export type LoginRequest = {
 };
 
 export type LoginResponse = {
-  accessToken: string;
-  refreshToken: string;
+  access_token: string;
+  csrf_token_key: string;
   user: { id: string; email: string };
 };
