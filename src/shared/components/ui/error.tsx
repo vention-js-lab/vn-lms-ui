@@ -18,9 +18,9 @@ export default function ErrorPage({
 }: Props) {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <div className="max-w-md w-full space-y-6 text-center">
-        <p className="text-8xl font-bold text-muted-foreground">{status}</p>
+    <div className="bg-background flex min-h-screen items-center justify-center p-6">
+      <div className="w-full max-w-md space-y-6 text-center">
+        <p className="text-muted-foreground text-8xl font-bold">{status}</p>
 
         <Alert variant="destructive" className="flex flex-col items-center text-center">
           <AlertCircle className="h-4 w-4" />

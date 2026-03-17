@@ -42,7 +42,7 @@ export default function InviteManagementRoute() {
   const onSubmit = handleSubmit((values) => inviteMutation.mutate(values));
 
   return (
-    <section className="flex flex-row-reverse w-screen items-center justify-center bg-white">
+    <section className="flex w-screen flex-row-reverse items-center justify-center bg-white">
       <div className="flex min-h-screen w-full items-center justify-center bg-white md:w-1/2">
         <Card className="w-full max-w-sm border-0 shadow-none">
           <CardHeader>
@@ -62,19 +62,19 @@ export default function InviteManagementRoute() {
                 <div className="grid gap-2">
                   <Label htmlFor="firstName"> First Name </Label>
                   <Input id="firstName" placeholder="Enter first name" {...register('firstName')} />
-                  {errors.firstName && <p className="text-sm text-destructive"> {errors.firstName.message} </p>}
+                  {errors.firstName && <p className="text-destructive text-sm"> {errors.firstName.message} </p>}
                 </div>
 
                 <div className="grid gap-2">
                   <Label htmlFor="lastName"> Last Name </Label>
                   <Input id="lastName" placeholder="Enter last name" {...register('lastName')} />
-                  {errors.lastName && <p className="text-sm text-destructive"> {errors.lastName.message} </p>}
+                  {errors.lastName && <p className="text-destructive text-sm"> {errors.lastName.message} </p>}
                 </div>
 
                 <div className="grid gap-2">
                   <Label htmlFor="email"> Email </Label>
                   <Input id="email" type="email" placeholder="Enter email" {...register('email')} />
-                  {errors.email && <p className="text-sm text-destructive"> {errors.email.message} </p>}
+                  {errors.email && <p className="text-destructive text-sm"> {errors.email.message} </p>}
                 </div>
 
                 <div className="grid gap-2">
@@ -82,7 +82,7 @@ export default function InviteManagementRoute() {
                   <select
                     id="role"
                     aria-label="Role"
-                    className="h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none"
+                    className="border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none"
                     {...register('role')}
                   >
                     <option value="student">Student</option>
@@ -90,7 +90,7 @@ export default function InviteManagementRoute() {
                     <option value="instructor">Instructor</option>
                     <option value="admin">Admin</option>
                   </select>
-                  {errors.role && <p className="text-sm text-destructive"> {errors.role.message} </p>}
+                  {errors.role && <p className="text-destructive text-sm"> {errors.role.message} </p>}
                 </div>
 
                 <Button className="w-full" disabled={!isValid || inviteMutation.isPending} type="submit">

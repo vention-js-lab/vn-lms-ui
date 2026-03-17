@@ -75,7 +75,7 @@ export function InviteByTokenRoute() {
         <Card className="w-full max-w-sm">
           <CardHeader>
             <CardTitle>Validating invite</CardTitle>
-            <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row items-center justify-between">
               <Spinner height={40} width={40} />
               <CardDescription>Please wait while we verify your invitation link.</CardDescription>
             </div>
@@ -97,7 +97,7 @@ export function InviteByTokenRoute() {
   }
 
   return (
-    <section className="flex flex-row-reverse w-screen items-center justify-center">
+    <section className="flex w-screen flex-row-reverse items-center justify-center">
       <div
         className="flex min-h-screen w-1/2 items-center justify-center bg-cover bg-center bg-no-repeat opacity-65"
         style={{ backgroundImage: `url(${loginBackground})` }}
@@ -144,7 +144,7 @@ export function InviteByTokenRoute() {
                     disabled={acceptInviteMutation.isPending}
                     {...register('password')}
                   />
-                  {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+                  {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
                 </div>
 
                 <Button className="w-full" disabled={!isValid || acceptInviteMutation.isPending} type="submit">
