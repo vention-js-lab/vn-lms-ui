@@ -30,17 +30,10 @@ const MODIFYING_METHODS = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 let refreshPromise: Promise<string> | null = null;
 
 async function refreshAccessToken(): Promise<string> {
-  const response = await fetch(`${BASE_URL}${API_ENDPOINTS.AUTH.REFRESH}`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+  const data = await apiClient.post<{ access_token: string }>(API_ENDPOINTS.AUTH.REFRESH, undefined, {
+    headers: { 'x-csrf-token': getCookie('csrf_token') || '' },
   });
 
-  if (!response.ok) {
-    throw new ApiError(response.status, await response.json().catch(() => null));
-  }
-
-  const data = (await response.json()) as { access_token: string };
   tokenStore.setAccessToken(data.access_token);
   return data.access_token;
 }
