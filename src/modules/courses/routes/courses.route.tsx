@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
 import { Button } from '#/shared/components/ui/button';
 import { Card, CardContent } from '#/shared/components/ui/card';
-import { Input } from '#/shared/components/ui/input';
 import { Label } from '#/shared/components/ui/label';
 import { Spinner } from '#/shared/components/ui/spinner';
 import { Alert, AlertDescription, AlertTitle } from '#/shared/components/ui/alert';
@@ -84,14 +83,8 @@ function formatDate(value: string): string {
 
 export function CoursesRoute() {
   const auth = useAuth();
-  const [search, setSearch] = useState('');
   const [stateFilter, setStateFilter] = useState<CourseState | 'all'>('all');
   const [page, setPage] = useState(1);
-
-  const handleSearchChange = (value: string) => {
-    setSearch(value);
-    setPage(1);
-  };
 
   const handleStateFilterChange = (value: CourseState | 'all') => {
     setStateFilter(value);
@@ -103,9 +96,8 @@ export function CoursesRoute() {
       page,
       limit: PAGE_SIZE,
       ...(stateFilter !== 'all' ? { state: stateFilter } : {}),
-      ...(search.trim() ? { search: search.trim() } : {}),
     }),
-    [page, search, stateFilter],
+    [page, stateFilter],
   );
 
   const coursesQuery = useCoursesQuery(params);
@@ -134,15 +126,6 @@ export function CoursesRoute() {
       </header>
 
       <div className="grid gap-4 md:grid-cols-[1fr_220px] md:items-end">
-        <div className="space-y-2">
-          <Label htmlFor="course-search">Search</Label>
-          <Input
-            id="course-search"
-            value={search}
-            onChange={(event) => handleSearchChange(event.target.value)}
-            placeholder="Search by title or creator"
-          />
-        </div>
         <div className="space-y-2">
           <Label htmlFor="course-state">State</Label>
           <select
@@ -201,7 +184,7 @@ export function CoursesRoute() {
                 {!coursesQuery.isLoading && courses.length === 0 && (
                   <tr>
                     <td colSpan={4} className="text-muted-foreground px-4 py-10 text-center text-sm">
-                      No courses found. Try adjusting your search or filters.
+                      No courses found. Try adjusting your filters.
                     </td>
                   </tr>
                 )}
