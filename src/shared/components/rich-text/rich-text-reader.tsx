@@ -15,26 +15,26 @@ const markdownComponents: Components = {
   ul: ({ children }) => <ul className="my-4 ml-6 list-disc">{children}</ul>,
   ol: ({ children }) => <ol className="my-4 ml-6 list-decimal">{children}</ol>,
   li: ({ children }) => <li className="mt-1">{children}</li>,
-  blockquote: ({ children }) => <blockquote className="mt-4 border-l-2 pl-6 italic text-muted-foreground">{children}</blockquote>,
+  blockquote: ({ children }) => <blockquote className="text-muted-foreground mt-4 border-l-2 pl-6 italic">{children}</blockquote>,
   code: ({ className, children, ...props }) => {
     const isBlock = Boolean(className?.startsWith('language-'));
 
     if (!isBlock) {
       return (
-        <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm" {...props}>
+        <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-sm" {...props}>
           {children}
         </code>
       );
     }
 
     return (
-      <code className="block overflow-x-auto rounded-lg bg-muted p-4 font-mono text-sm" {...props}>
+      <code className="bg-muted block overflow-x-auto rounded-lg p-4 font-mono text-sm" {...props}>
         {children}
       </code>
     );
   },
   a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noreferrer" className="font-medium text-primary underline underline-offset-4">
+    <a href={href} target="_blank" rel="noreferrer" className="text-primary font-medium underline underline-offset-4">
       {children}
     </a>
   ),

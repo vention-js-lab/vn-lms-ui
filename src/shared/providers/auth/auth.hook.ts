@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { AuthStatus, isAccessTokenExpired, useAuthStore } from './auth.store';
+import { isAccessTokenExpired, useAuthStore } from './auth.store';
+import { AuthStatus } from '#/shared/constants';
 
 export function useAuth() {
   const auth = useAuthStore();
-  const isExpired = auth.status === AuthStatus.AUTHENTICATED && isAccessTokenExpired(auth.token);
+  const isExpired = auth.status === AuthStatus.AUTHENTICATED && isAccessTokenExpired(auth.token ?? '');
 
   useEffect(() => {
     if (isExpired) {

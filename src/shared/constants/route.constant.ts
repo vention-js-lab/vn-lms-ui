@@ -12,8 +12,8 @@ export const ROUTES = {
   },
   DASHBOARD: '/dashboard',
   COURSES: {
-    ROOT:'courses', 
-    CREATE:'create'
+    ROOT: 'courses',
+    CREATE: 'create',
   },
   PROFILE: '/profile',
   SETTINGS: '/settings',

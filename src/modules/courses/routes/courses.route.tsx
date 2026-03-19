@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { Button } from '#/shared/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '#/shared/components/ui/card';
-import { ROUTES } from '#/router/routes';
+import { ROUTES } from '#/shared/constants';
 
 export function CoursesRoute() {
   return (
@@ -14,11 +14,11 @@ export function CoursesRoute() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Start by creating your first course and we’ll bring the rest of the flow around it.
           </p>
           <Button asChild>
-            <Link to={ROUTES.courses.create}>Create Course</Link>
+            <Link to={ROUTES.COURSES.CREATE}>Create Course</Link>
           </Button>
         </CardContent>
       </Card>

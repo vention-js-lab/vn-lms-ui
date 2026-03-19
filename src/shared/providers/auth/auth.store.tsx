@@ -26,6 +26,7 @@ type AuthActions = {
 
 export type AuthStore = AuthState & AuthActions;
 
+const INITIAL_GUEST_STATE: AuthState = { status: AuthStatus.GUEST, user: null, token: null };
 export function isAccessTokenExpired(token: string): boolean {
   try {
     const payload = JSON.parse(atob(token.split('.')[1])) as {
@@ -71,9 +72,11 @@ function getInitialAuthState(): AuthState {
 }
 
 export const useAuthStore = create<AuthStore>()((set) => ({
+  ...INITIAL_GUEST_STATE,
   ...getInitialAuthState(),
   login: (token, user) => {
-    set({ status: AuthStatus.AUTHENTICATED, user, token });
+    LOCAL_STORAGE.SET_ACCESS_TOKEN(token);
+    set({ status: AuthStatus.AUTHENTICATED, user: user ?? { id: '', email: '' }, token });
   },
   logout: () => {
     LOCAL_STORAGE.SET_ACCESS_TOKEN(null);

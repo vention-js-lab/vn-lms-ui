@@ -84,7 +84,7 @@ export default function EditorBubbleMenu({ editor }: { editor: Editor }) {
     <BubbleMenu
       editor={editor}
       updateDelay={0}
-      className="flex items-center gap-0.5 rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md"
+      className="border-border bg-popover text-popover-foreground flex items-center gap-0.5 rounded-lg border p-1 shadow-md"
     >
       <Button
         type="button"

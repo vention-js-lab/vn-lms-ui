@@ -2,6 +2,7 @@ export const API_ENDPOINTS = {
   ROOT: '/',
   AUTH: {
     LOGIN: '/auth/login',
+    REFRESH: '/auth/refresh',
     RESEND_INVITE: '/auth/resend-invite',
     FORGOT_PASSWORD: '/auth/forgot-password',
   },
@@ -10,7 +11,7 @@ export const API_ENDPOINTS = {
     CREATE: '/invites',
     ACCEPT_INVITE: '/invites/accept-invite',
   },
-  COURSE:{
-    CREATE:'/courses/create'
-  }
+  COURSE: {
+    CREATE: '/courses/create',
+  },
 };
