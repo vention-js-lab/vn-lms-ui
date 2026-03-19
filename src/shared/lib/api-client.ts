@@ -59,12 +59,22 @@ function buildHeaders(method: string, token: string | null, extra?: HeadersInit)
   const csrfToken = getCookie('csrf_token');
   const isModifying = MODIFYING_METHODS.has(method.toUpperCase());
 
-  return {
+  const baseHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(isModifying && csrfToken ? { 'x-csrf-token': csrfToken } : {}),
-    ...(extra as Record<string, string>),
   };
+
+  if (!extra) {
+    return baseHeaders;
+  }
+
+  const extraHeaders = new Headers(extra);
+  extraHeaders.forEach((value, key) => {
+    baseHeaders[key] = value;
+  });
+
+  return baseHeaders;
 }
 
 async function executeRequest<T>(url: string, init: RequestInit): Promise<T> {
