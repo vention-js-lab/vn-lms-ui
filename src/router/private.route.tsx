@@ -1,10 +1,8 @@
 import type { RouteObject } from 'react-router';
 import { AuthGuard } from './auth.guard';
-import { RoleGuard } from './role.guard';
 import { ROUTES } from '#/shared/constants';
 import Courses from '#/modules/courses/components';
 import { coursesRoutes } from '#/modules/courses';
-import { UserRole } from '#/shared/enums';
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -19,7 +17,6 @@ export const privateRoutes: RouteObject[] = [
         lazy: () => import('#/modules/dashboard').then((m) => ({ Component: m.DashboardRoute })),
       },
       {
-        element: <RoleGuard allowedRoles={[UserRole.INSTRUCTOR, UserRole.ADMIN]} />,
         children: [
           {
             path: ROUTES.INVITE.MANAGEMENT,
