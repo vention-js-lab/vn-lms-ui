@@ -11,7 +11,10 @@ export const ROUTES = {
     MANAGEMENT: '/invite-management',
   },
   DASHBOARD: '/dashboard',
-  COURSES: '/courses',
+  COURSES: {
+    ROOT: 'courses',
+    CREATE: 'create',
+  },
   PROFILE: '/profile',
   SETTINGS: '/settings',
 };

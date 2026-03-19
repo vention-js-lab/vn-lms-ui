@@ -1,4 +1,4 @@
-import { tokenStore } from '#/shared/providers/auth/auth.storage';
+import { LOCAL_STORAGE } from '#/shared/providers/auth/auth.storage';
 import { API_ENDPOINTS } from '#/shared/constants';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
@@ -34,7 +34,7 @@ async function refreshAccessToken(): Promise<string> {
     headers: { 'x-csrf-token': getCookie('csrf_token') || '' },
   });
 
-  tokenStore.setAccessToken(data.access_token);
+  LOCAL_STORAGE.SET_ACCESS_TOKEN(data.access_token);
   return data.access_token;
 }
 
@@ -85,7 +85,7 @@ async function executeRequest<T>(url: string, init: RequestInit): Promise<T> {
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
   const { body, headers, params, method = 'GET', ...rest } = options;
   const url = buildUrl(endpoint, params);
-  const token = tokenStore.getAccessToken();
+  const token = LOCAL_STORAGE.GET_ACCESS_TOKEN();
 
   const init: RequestInit = {
     method,
@@ -112,7 +112,7 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
         };
         return await executeRequest<T>(url, retryInit);
       } catch {
-        tokenStore.clearAccessToken();
+        LOCAL_STORAGE.SET_ACCESS_TOKEN(null);
         throw new ApiError(401, { message: 'Session expired. Please log in again.' });
       }
     }
